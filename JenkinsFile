@@ -1,9 +1,8 @@
 pipeline {
     stages {
-        stage('Check version') {
+        stage('deploy') {
             steps {
-                sh 'node --version'
-                sh 'npm --version'
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'my-jenkins-deploy-bucket', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'ap-south-1', showDirectlyInBrowser: false, sourceFile: '**/*', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'MyS3Profile', userMetadata: []
             }
         }
     }
